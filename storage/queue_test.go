@@ -326,6 +326,8 @@ func TestClearAndPush(t *testing.T) {
 }
 
 func BenchmarkQueuePerformance(b *testing.B) {
+	DefaultMaxSize = uint64(10000000000)
+
 	defer os.RemoveAll("/tmp/qblah.db")
 	store, err := Open("rocksdb", "/tmp/qblah.db")
 	assert.NoError(b, err)
@@ -553,4 +555,44 @@ func TestBlockingPop(t *testing.T) {
 	rq.Close()
 	wg.Wait()
 	assert.Equal(t, int64(4), nothing)
+}
+
+func BenchmarkPush(b *testing.B) {
+	DefaultMaxSize = uint64(10000000000)
+
+	defer os.RemoveAll("/tmp/benchmark_push.db")
+	store, err := Open("rocksdb", "/tmp/benchmark_push.db")
+	assert.NoError(b, err)
+	assert.NotNil(b, store)
+	defer store.Close()
+	q, err := store.GetQueue("default")
+	assert.NoError(b, err)
+
+	_, data := fakeJob()
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		assert.NoError(b, q.Push(5, data))
+	}
+}
+
+func BenchmarkPop(b *testing.B) {
+	DefaultMaxSize = uint64(10000000000)
+
+	defer os.RemoveAll("/tmp/benchmark_pop.db")
+	store, err := Open("rocksdb", "/tmp/benchmark_pop.db")
+	assert.NoError(b, err)
+	assert.NotNil(b, store)
+	defer store.Close()
+	q, err := store.GetQueue("default")
+	assert.NoError(b, err)
+
+	_, data := fakeJob()
+	for i := 0; i < b.N; i++ {
+		q.Push(5, data)
+	}
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		q.Pop()
+	}
 }
