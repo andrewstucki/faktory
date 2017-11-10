@@ -1,0 +1,10 @@
+image: Visual Studio 2015
+
+install:
+  - vcpkg install rocksdb:x64-windows
+  - make prepare
+
+build: false
+
+test_script:
+  - make test
