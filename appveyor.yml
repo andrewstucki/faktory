@@ -13,7 +13,6 @@ install:
   - rmdir c:\go /s /q
   - dir C:\Tools\vcpkg\installed\x64-windows\include
   - dir C:\Tools\vcpkg\installed\x64-windows\lib
-  - dir C:\Tools\vcpkg\installed\x64-windows\lib\manual-link
   - appveyor DownloadFile https://storage.googleapis.com/golang/go%GOVERSION%.windows-amd64.msi
   - msiexec /i go%GOVERSION%.windows-amd64.msi /q
   - choco install bzr
@@ -21,6 +20,7 @@ install:
   - go version
   - go env
   - vcpkg install rocksdb:x64-windows
+  - copy C:\Tools\vcpkg\installed\x64-windows\lib\rocksdb-shared.lib C:\Tools\vcpkg\installed\x64-windows\lib\rocksdb.lib
   - go get github.com/golang/dep/cmd/dep
   - dep ensure
   - go get github.com/benbjohnson/ego/cmd/ego
