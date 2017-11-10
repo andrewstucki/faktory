@@ -1,10 +1,28 @@
 image: Visual Studio 2015
 
+clone_folder: c:\gopath\src\github.com\contribsys\faktory
+
+environment:
+  GOPATH: c:\gopath
+  GOVERSION: 1.8
+
 install:
+  - rmdir c:\go /s /q
+  - appveyor DownloadFile https://storage.googleapis.com/golang/go%GOVERSION%.windows-amd64.msi
+  - msiexec /i go%GOVERSION%.windows-amd64.msi /q
+  - choco install bzr
+  - set Path=c:\go\bin;c:\gopath\bin;C:\Program Files (x86)\Bazaar\;C:\Program Files\Mercurial\;%Path%
+  - go version
+  - go env
   - vcpkg install rocksdb:x64-windows
   - make prepare
 
 build: false
+deploy: false
 
 test_script:
   - make test
+
+cache:
+  - 'C:\Tools\vcpkg\installed'
+  - 'C:\Tools\vcpkg\packages'
