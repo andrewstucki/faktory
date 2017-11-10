@@ -3,6 +3,7 @@ image: Visual Studio 2015
 clone_folder: c:\gopath\src\github.com\contribsys\faktory
 
 environment:
+  APPVEYOR_SAVE_CACHE_ON_ERROR: true
   GOPATH: c:\gopath
   GOVERSION: 1.8
 
