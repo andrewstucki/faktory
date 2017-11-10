@@ -12,6 +12,7 @@ environment:
 install:
   - rmdir c:\go /s /q
   - dir C:\Tools\vcpkg\installed\x64-windows\include
+  - dir C:\Tools\vcpkg\installed\x64-windows\lib
   - appveyor DownloadFile https://storage.googleapis.com/golang/go%GOVERSION%.windows-amd64.msi
   - msiexec /i go%GOVERSION%.windows-amd64.msi /q
   - choco install bzr
