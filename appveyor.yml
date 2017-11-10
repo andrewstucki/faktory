@@ -16,13 +16,13 @@ install:
   - go version
   - go env
   - vcpkg install rocksdb:x64-windows
-  - make prepare
+  - nmake prepare
 
 build: false
 deploy: false
 
 test_script:
-  - make test
+  - nmake test
 
 cache:
   - 'C:\Tools\vcpkg\installed'
