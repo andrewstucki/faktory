@@ -20,7 +20,7 @@ install:
   - vcpkg install rocksdb:x64-windows
   - dir C:\Tools\vcpkg\installed\x64-windows\include
   - dir C:\Tools\vcpkg\installed\x64-windows\lib
-  - copy C:\Tools\vcpkg\installed\x64-windows\lib\rocksdb-shared.lib C:\Tools\vcpkg\installed\x64-windows\lib\rocksdb.lib
+  - copy /y C:\Tools\vcpkg\installed\x64-windows\lib\rocksdb-shared.lib C:\Tools\vcpkg\installed\x64-windows\lib\rocksdb.lib
   - go get github.com/golang/dep/cmd/dep
   - dep ensure
   - go get github.com/benbjohnson/ego/cmd/ego
