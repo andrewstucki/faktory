@@ -40,7 +40,7 @@ func init() {
 }
 
 func isTTY(fd int) bool {
-	ptrFD := (uintptr)(unsafe.Pointer(fd))
+	ptrFD := (uintptr)(unsafe.Pointer(&fd))
 	return isTerminal(ptrFD) || isCygwinTerminal(ptrFD)
 }
 
