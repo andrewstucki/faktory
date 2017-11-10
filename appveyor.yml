@@ -6,11 +6,11 @@ environment:
   APPVEYOR_SAVE_CACHE_ON_ERROR: true
   GOPATH: c:\gopath
   GOVERSION: 1.8
-  CGO_CFLAGS: -I C:\Tools\vcpkg\installed\x64-windows\rocksdb\include
+  CGO_CFLAGS: -I C:\Tools\vcpkg\installed\x64-windows\include
 
 install:
   - rmdir c:\go /s /q
-  - dir C:\Tools\vcpkg\installed\x64-windows
+  - dir C:\Tools\vcpkg\installed\x64-windows\include
   - appveyor DownloadFile https://storage.googleapis.com/golang/go%GOVERSION%.windows-amd64.msi
   - msiexec /i go%GOVERSION%.windows-amd64.msi /q
   - choco install bzr
