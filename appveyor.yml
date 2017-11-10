@@ -30,7 +30,7 @@ build: false
 deploy: false
 
 test_script:
-  - go test -parallel 4 github.com/contribsys/faktory github.com/contribsys/faktory/server github.com/contribsys/faktory/storage github.com/contribsys/faktory/test github.com/contribsys/faktory/util github.com/contribsys/faktory/webui github.com/contribsys/faktory/cmd/faktory-cli
+  - go test -parallel 4 github.com/contribsys/faktory github.com/contribsys/faktory/server github.com/contribsys/faktory/storage github.com/contribsys/faktory/test github.com/contribsys/faktory/util github.com/contribsys/faktory/cmd/faktory-cli
 
 cache:
   - 'C:\Tools\vcpkg\installed'
