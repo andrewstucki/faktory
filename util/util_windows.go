@@ -40,7 +40,8 @@ func init() {
 }
 
 func isTTY(fd int) bool {
-	return isTerminal(fd) || isCygwinTerminal(fd)
+	ptrFD := (uintptr)(unsafe.Pointer(fd))
+	return isTerminal(ptrFD) || isCygwinTerminal(ptrFD)
 }
 
 // isTerminal return true if the file descriptor is terminal.
