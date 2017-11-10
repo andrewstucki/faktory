@@ -8,7 +8,6 @@ environment:
   GOVERSION: 1.8
 
 install:
-  - '"C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64'
   - rmdir c:\go /s /q
   - appveyor DownloadFile https://storage.googleapis.com/golang/go%GOVERSION%.windows-amd64.msi
   - msiexec /i go%GOVERSION%.windows-amd64.msi /q
@@ -17,13 +16,16 @@ install:
   - go version
   - go env
   - vcpkg install rocksdb:x64-windows
-  - nmake prepare
+  - go get github.com/golang/dep/cmd/dep
+  - dep ensure
+  - go get github.com/benbjohnson/ego/cmd/ego
+  - go get github.com/jteeuwen/go-bindata/go-bindata
 
 build: false
 deploy: false
 
 test_script:
-  - nmake test
+  - go test -parallel 4 github.com/contribsys/faktory github.com/contribsys/faktory/server github.com/contribsys/faktory/storage github.com/contribsys/faktory/test github.com/contribsys/faktory/util github.com/contribsys/faktory/webui github.com/contribsys/faktory/cmd/faktory-cli
 
 cache:
   - 'C:\Tools\vcpkg\installed'
